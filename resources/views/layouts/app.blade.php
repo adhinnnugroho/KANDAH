@@ -20,7 +20,32 @@
     @livewireStyles
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-sans antialiased" x-data="{ darkModeStore: null }" x-init="darkModeStore = Alpine.store('darkMode', {
+    dark: false,
+
+    init() {
+        const storedDarkMode = localStorage.getItem('darkMode');
+        if (storedDarkMode !== null) {
+            this.dark = JSON.parse(storedDarkMode);
+        }
+
+        this.updateTheme();
+    },
+
+    toggle() {
+        this.dark = !this.dark;
+        localStorage.setItem('darkMode', this.dark);
+        this.updateTheme();
+    },
+
+    updateTheme() {
+        if (this.dark) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    }
+})">
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
 
         <aside class="fixed lg:w-96 w-screen h-screen" x-data="{
@@ -67,7 +92,6 @@
     @livewireScripts
     <x-livewire-alert::scripts />
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 
     @stack('scripts')
 

@@ -3,9 +3,15 @@ import './bootstrap';
 import Alpine from 'alpinejs'
 
 Alpine.store('darkMode', {
-    dark: localStorage.getItem('darkMode') === 'true',
+    dark: false,
 
     init() {
+        const storedDarkMode = localStorage.getItem('darkMode');
+        console.log(storedDarkMode);
+        if (storedDarkMode !== null) {
+            this.dark = JSON.parse(storedDarkMode);
+        }
+
         this.updateTheme();
     },
 
@@ -24,7 +30,10 @@ Alpine.store('darkMode', {
     }
 });
 
-Alpine.store('darkMode').init();
+document.addEventListener('alpine:init', () => {
+    // Initialize the darkMode store when Alpine is initialized
+    Alpine.store('darkMode').init();
+});
 
 
 Alpine.start()
