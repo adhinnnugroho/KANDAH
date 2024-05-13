@@ -1,13 +1,13 @@
 <div>
     <h5 class="text-2xl dark:text-white text-black font-semibold ml-4 mt-5 py-4 px-2 cursor-pointer"
-        x-on:click="welcomeScreen = !welcomeScreen, SystemSetting = !SystemSetting">
+        x-on:click="SystemSettingScreen = !SystemSettingScreen">
         <i class="fa fa-arrow-left mr-4"></i>Pengaturan
     </h5>
 
-    <x-input.search-input type="text" placeholder="Cari di setelan" wire:model.live="search_chat" />
+    <x-input.search-input type="text" placeholder="Cari di setelan" />
 
     <div class="border border-b-1 dark:border-b-gray-600 dark:border-gray-800 border-white border-b-gray-300"
-        x-on:click=" ProfileSetting = !ProfileSetting">
+        x-on:click="ProfileSettingScreen = !ProfileSettingScreen">
         <x-contact.list-contact :image="$current_user->UserDetails->avatar" :name="$current_user->name" />
     </div>
 

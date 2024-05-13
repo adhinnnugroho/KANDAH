@@ -7,7 +7,6 @@ Alpine.store('darkMode', {
 
     init() {
         const storedDarkMode = localStorage.getItem('darkMode');
-        console.log(storedDarkMode);
         if (storedDarkMode !== null) {
             this.dark = JSON.parse(storedDarkMode);
         }

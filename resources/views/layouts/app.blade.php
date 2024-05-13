@@ -20,41 +20,15 @@
     @livewireStyles
 </head>
 
-<body class="font-sans antialiased" x-data="{ darkModeStore: null }" x-init="darkModeStore = Alpine.store('darkMode', {
-    dark: false,
-
-    init() {
-        const storedDarkMode = localStorage.getItem('darkMode');
-        if (storedDarkMode !== null) {
-            this.dark = JSON.parse(storedDarkMode);
-        }
-
-        this.updateTheme();
-    },
-
-    toggle() {
-        this.dark = !this.dark;
-        localStorage.setItem('darkMode', this.dark);
-        this.updateTheme();
-    },
-
-    updateTheme() {
-        if (this.dark) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-    }
-})">
+<body class="font-sans antialiased" x-data="{ darkModeStore: null }" x-init="darkModeStore = initializeDarkMode()">
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
 
         <aside class="fixed lg:w-96 w-screen h-screen" x-data="{
-            welcomeScreen: true,
-            SystemSetting: false,
-            ProfileSetting: false
+            SystemSettingScreen: false,
+            ProfileSettingScreen: false
         }">
             <div class="h-full  overflow-y-auto bg-gray-50 dark:bg-gray-800">
-                <template x-if="!SystemSetting && !ProfileSetting">
+                <div x-show="!SystemSettingScreen && !ProfileSettingScreen" x-transition x-cloak>
                     <div>
                         @livewire('navigation.profile-navigation')
                         <x-input.search-input type="text" placeholder="search chatting"
@@ -68,19 +42,17 @@
                             </p>
                         </div>
                     </div>
-                </template>
+                </div>
 
-                <template x-if="SystemSetting">
-                    <div class="">
-                        @livewire('settings.system-settings')
-                    </div>
-                </template>
+                <div x-show="SystemSettingScreen && !ProfileSettingScreen" x-transition x-cloak>
+                    @livewire('settings.system-settings')
+                </div>
 
-                <template x-if="ProfileSetting">
+                <div x-show="ProfileSettingScreen" x-transition x-cloak>
                     <div class="">
-                        {{-- @livewire('settings.profile-settings') --}}
+                        @livewire('settings.profile-settings')
                     </div>
-                </template>
+                </div>
             </div>
         </aside>
         <div class="sm:ml-[24rem]">
@@ -93,7 +65,36 @@
     @livewireScripts
     <x-livewire-alert::scripts />
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function initializeDarkMode() {
+            Alpine.store('darkMode', {
+                dark: false,
 
+                init() {
+                    const storedDarkMode = localStorage.getItem('darkMode');
+                    if (storedDarkMode !== null) {
+                        this.dark = JSON.parse(storedDarkMode);
+                    }
+
+                    this.updateTheme();
+                },
+
+                toggle() {
+                    this.dark = !this.dark;
+                    localStorage.setItem('darkMode', this.dark);
+                    this.updateTheme();
+                },
+
+                updateTheme() {
+                    if (this.dark) {
+                        document.documentElement.classList.add('dark');
+                    } else {
+                        document.documentElement.classList.remove('dark');
+                    }
+                }
+            });
+        }
+    </script>
     @stack('scripts')
 
 </body>

@@ -1,7 +1,7 @@
 <div>
     <div class="py-3 border border-b-1 dark:border-b-gray-600 dark:border-gray-800 border-white border-b-gray-300">
         <div class="flex flex-wrap justify-between">
-            <div>
+            <div x-on:click="ProfileSettingScreen = !ProfileSettingScreen">
                 <x-image.show-image :image="$current_user->UserDetails->avatar" class="rounded-full h-11 w-11 ml-3 cursor-pointer" />
             </div>
             <div class="float-right" x-data="{ OpenMenuProfileNavigation: false }">
@@ -11,7 +11,7 @@
                     <x-menu.drop-down-menu id="show-profile-setting" show_id="OpenMenuProfileNavigation"
                         class="right-2 mt-10 dark:bg-gray-700 dark:border-gray-700 dark:text-white bg-white">
                         <x-menu.list-menu
-                            x-on:click="welcomeScreen = !welcomeScreen, OpenMenuProfileNavigation = false, SystemSetting = !SystemSetting">
+                            x-on:click="OpenMenuProfileNavigation = false, SystemSettingScreen = !SystemSettingScreen">
                             Setelan
                         </x-menu.list-menu>
                         <x-menu.list-menu>
