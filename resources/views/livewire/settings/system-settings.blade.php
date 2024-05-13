@@ -6,7 +6,8 @@
 
     <x-input.search-input type="text" placeholder="Cari di setelan" wire:model.live="search_chat" />
 
-    <div class="border border-b-1 dark:border-b-gray-600 dark:border-gray-800 border-white border-b-gray-300">
+    <div class="border border-b-1 dark:border-b-gray-600 dark:border-gray-800 border-white border-b-gray-300"
+        x-on:click=" ProfileSetting = !ProfileSetting">
         <x-contact.list-contact :image="$current_user->UserDetails->avatar" :name="$current_user->name" />
     </div>
 

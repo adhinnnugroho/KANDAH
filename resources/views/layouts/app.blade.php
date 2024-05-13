@@ -54,14 +54,11 @@
             ProfileSetting: false
         }">
             <div class="h-full  overflow-y-auto bg-gray-50 dark:bg-gray-800">
-                <template x-if="welcomeScreen">
+                <template x-if="!SystemSetting && !ProfileSetting">
                     <div>
                         @livewire('navigation.profile-navigation')
                         <x-input.search-input type="text" placeholder="search chatting"
                             wire:model.live="search_chat" />
-
-
-
                         <div class="">
                             <img src="{{ asset('/assets/img/notfound.svg') }}" alt=""
                                 class="w-72 lg:mt-32 lg:ml-10">
@@ -78,14 +75,18 @@
                         @livewire('settings.system-settings')
                     </div>
                 </template>
+
+                <template x-if="ProfileSetting">
+                    <div class="">
+                        {{-- @livewire('settings.profile-settings') --}}
+                    </div>
+                </template>
             </div>
         </aside>
-
-        <div class="p-4 sm:ml-64">
-
-
-
-            {{ $slot }}
+        <div class="sm:ml-[24rem]">
+            <div class="">
+                {{ $slot }}
+            </div>
         </div>
     </div>
 

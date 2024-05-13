@@ -3,13 +3,15 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Traits\UserDetailsConnections;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, UserDetailsConnections;
 
     /**
      * The attributes that are mass assignable.
@@ -43,6 +45,6 @@ class User extends Authenticatable
 
     public function UserDetails()
     {
-        return $this->hasOne(UserDetails::class, 'id', 'id_user_details');
+        return $this->UserDetailConnection();
     }
 }
