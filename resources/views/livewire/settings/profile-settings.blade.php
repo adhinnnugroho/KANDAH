@@ -21,6 +21,13 @@
 
         <x-menu.drop-down-menu id="show-profile-setting" show_id="openImageProfileSetting" class="right-6 -mt-24"
             wire:key="profile-{{ $current_user->id }}" wire:ignore>
+            @livewire(
+                'profile.show-image-profile',
+                [
+                    'image' => $current_user->UserDetails->avatar,
+                ],
+                key('profile-' . $current_user->id)
+            )
         </x-menu.drop-down-menu>
     </div>
 
