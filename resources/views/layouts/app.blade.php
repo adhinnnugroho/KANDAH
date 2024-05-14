@@ -13,7 +13,19 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="{{ asset('/assets/css/crop/crop.css') }}">
 
+    <style>
+        .cropper-view-box,
+        .cropper-face {
+            border-radius: 50%;
+        }
+
+        .cropper-view-box {
+            outline: 0;
+            box-shadow: 0 0 0 1px white;
+        }
+    </style>
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -65,6 +77,10 @@
     @livewireScripts
     <x-livewire-alert::scripts />
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="{{ asset('/assets/js/custom-function.js') }}"></script>
+    <script src="{{ asset('/assets/js/crop/crop.js') }}"></script>
     <script>
         function initializeDarkMode() {
             Alpine.store('darkMode', {
