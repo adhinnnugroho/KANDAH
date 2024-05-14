@@ -1,4 +1,4 @@
-<div x-data="{ ShowProfileImageModalsOpen: false }" wire:ignore>
+<div x-data="{ ShowProfileImageModalsOpen: false }">
     <li class="p-2 hover:bg-gray-300 cursor-pointer dark:text-white dark:hover:text-black text-xl font-semibold"
         x-on:click="ShowProfileImageModalsOpen = !ShowProfileImageModalsOpen">
         <a href="#">Lihat Foto</a>
@@ -16,7 +16,7 @@
                 </button>
             </x-slot>
             <x-image.show-image :image="$image"
-                class="group-hover:opacity-50 object-cover w-96 h-96  content-center mx-auto" />
+                class="group-hover:opacity-50 object-cover w-96 h-96 rounded-full content-center mx-auto" />
         </div>
     </x-modal.simple-modal>
 </div>

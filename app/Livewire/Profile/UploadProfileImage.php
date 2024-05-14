@@ -50,7 +50,6 @@ class UploadProfileImage extends Component
 
     public function uploadfiletoServer($image)
     {
-        // $filelocation = $this->uploadProfile($image);
         $user = Auth::user();
         $Upload = Upload::toUpload($image, 'profile_user');
         $filelocation = $Upload['filelocation'];
@@ -69,7 +68,7 @@ class UploadProfileImage extends Component
 
         $this->setToast($alert['status'], $alert['title'], $alert['message']);
         $this->reset();
-        $this->dispatch('setting:profileImageUpdated');
+        $this->dispatch('refreshAllComponents');
     }
 
     public function setToast($status, $title, $message)

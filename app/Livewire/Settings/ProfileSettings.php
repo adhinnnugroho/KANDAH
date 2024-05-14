@@ -12,6 +12,7 @@ class ProfileSettings extends Component
     public $current_user;
     public $name, $info_account;
     public $listeners = [
+        'refreshInputComponent' => '$refresh',
         'refreshAllComponents' => '$refresh',
     ];
 
@@ -43,7 +44,7 @@ class ProfileSettings extends Component
             'name' => $this->name
         ]);
 
-        $this->dispatch('refreshAllComponents');
+        $this->dispatch('refreshInputComponent');
     }
 
     public function updateInfo()
@@ -54,6 +55,6 @@ class ProfileSettings extends Component
             'info_account' => $this->info_account
         ]);
 
-        $this->dispatch('refreshAllComponents');
+        $this->dispatch('refreshInputComponent');
     }
 }

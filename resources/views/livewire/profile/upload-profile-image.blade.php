@@ -1,13 +1,13 @@
 <div>
 
     <li class="p-2 hover:bg-gray-300 cursor-pointer  dark:text-white dark:hover:text-black text-xl font-semibold"
-        id="upload-button">
-        <a wire:loading wire:target="image">Loading</a>
-        <a wire:loading.remove wire:target="image">Upload Foto</a>
+        id="upload-button" onclick="document.getElementById('hidden-file').click()">
+        <div wire:loading wire:target="image">Loading</div>
+        <div wire:loading.remove wire:target="image">Upload Foto</div>
     </li>
     <input type="file" id="hidden-file" name="hidden_file" wire:model.defer='image' onclick="preview()" class="hidden">
     @if ($showModalImage)
-        <div x-data="{ open: false }" x-init="open = !open;">
+        <div x-data="{ open: false }" x-init="open = !open;" x-cloak>
             <x-modal.simple-modal id="feedback-modal" show_id="open" title="Drag the image to adjust" subtitle="">
                 <x-slot name="icon">
                     <button wire:click="closeModal" class="text-red-600 focus:outline-none hover:text-red-700">
@@ -22,7 +22,7 @@
 
 
                 <x-slot name="footer">
-                    <x-button.rounded-button id="btn_image_save" class="bg-gold-500 text-ubuntu text-base w-full mt-5"
+                    <x-button.rounded-button id="btn_image_save" class="bg-blue-500 text-ubuntu text-base w-full mt-5"
                         color="grey">
                         {{ __('Simpan') }}
                     </x-button.rounded-button>
@@ -64,10 +64,7 @@
                 return canvas;
             }
 
-            $("#upload-button").on("click", function(e) {
-                e.preventDefault();
-                document.getElementById("hidden-file").click();
-            });
+
 
             function preview() {
                 const inputImage = document.getElementById('hidden-file');

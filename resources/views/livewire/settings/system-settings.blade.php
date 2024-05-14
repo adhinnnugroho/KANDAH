@@ -12,17 +12,17 @@
     </div>
 
     <x-card.list-setting-card @click="$store.darkMode.toggle()">
-        <template x-if="$store.darkMode.dark">
+        <div x-show="$store.darkMode.dark" x-cloak>
             <div class="lg:ml-4 dark:text-white ">
                 <i class="fas fa-sun text-lg lg:mr-2"></i>
                 Light Mode
             </div>
-        </template>
-        <template x-if="!$store.darkMode.dark">
+        </div>
+        <div x-show="!$store.darkMode.dark" x-cloak>
             <div class="lg:ml-4">
                 <i class="fas fa-moon text-lg lg:mr-2"></i>
                 Dark Mode
             </div>
-        </template>
+        </div>
     </x-card.list-setting-card>
 </div>
