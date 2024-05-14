@@ -28,6 +28,8 @@
                 ],
                 key('profile-' . $current_user->id)
             )
+
+            @livewire('profile.remove-profile-image', key('profile-' . $current_user->id))
         </x-menu.drop-down-menu>
     </div>
 
