@@ -6,8 +6,6 @@
     </a>
 @else
     <li class="p-2 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer" {{ $attributes }}>
-        <a href="#">
-            {{ $slot }}
-        </a>
+        {{ $slot }}
     </li>
 @endif

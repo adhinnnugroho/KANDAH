@@ -32,17 +32,18 @@
     @livewireStyles
 </head>
 
-<body class="font-sans antialiased" x-data="{ darkModeStore: null }" x-init="darkModeStore = initializeDarkMode()">
+<body class="font-sans antialiased" x-data="{
+    darkModeStore: null,
+    SystemSettingScreen: false,
+    ProfileSettingScreen: false,
+}" x-init="darkModeStore = initializeDarkMode()">
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
 
-        <aside class="fixed lg:w-96 w-screen h-screen" x-data="{
-            SystemSettingScreen: false,
-            ProfileSettingScreen: false
-        }">
+        <aside class="fixed lg:w-96 w-screen h-screen">
             <div class="h-full  overflow-y-auto bg-gray-50 dark:bg-gray-800">
-                <div x-show="!SystemSettingScreen && !ProfileSettingScreen" x-transition x-cloak>
-                    <div>
-                        @livewire('navigation.profile-navigation')
+                <template x-if="!ProfileSettingScreen && !SystemSettingScreen">
+                    <div class="WelcomeScreen">
+                        @livewire('navigation.profile-navigation', key(time()))
                         <x-input.search-input type="text" placeholder="search chatting"
                             wire:model.live="search_chat" />
                         <div class="">
@@ -54,16 +55,15 @@
                             </p>
                         </div>
                     </div>
-                </div>
+                </template>
 
-                <div x-show="SystemSettingScreen && !ProfileSettingScreen" x-transition x-cloak>
+
+                <div x-show="SystemSettingScreen " x-cloak>
                     @livewire('settings.system-settings')
                 </div>
 
-                <div x-show="ProfileSettingScreen" x-transition x-cloak>
-                    <div class="">
-                        @livewire('settings.profile-settings')
-                    </div>
+                <div x-show="ProfileSettingScreen" x-cloak>
+                    @livewire('settings.profile-settings')
                 </div>
             </div>
         </aside>
