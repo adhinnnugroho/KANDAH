@@ -15,4 +15,9 @@ class ShowImageProfile extends Component
     {
         return view('livewire.profile.show-image-profile');
     }
+
+    public function closeModal()
+    {
+        $this->dispatch('refreshAllComponents');
+    }
 }
