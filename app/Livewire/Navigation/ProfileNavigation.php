@@ -23,4 +23,10 @@ class ProfileNavigation extends Component
     {
         $this->current_user = Auth::user();
     }
+
+    public function logout()
+    {
+        Auth::logout();
+        $this->dispatch('refreshAllComponents');
+    }
 }

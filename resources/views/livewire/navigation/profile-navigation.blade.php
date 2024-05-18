@@ -14,7 +14,7 @@
                             x-on:click="SystemSettingScreen = !SystemSettingScreen, OpenMenuProfileNavigation = false">
                             Setelan
                         </x-menu.list-menu>
-                        <x-menu.list-menu>
+                        <x-menu.list-menu wire:click="logout">
                             Logout
                         </x-menu.list-menu>
                     </x-menu.drop-down-menu>
