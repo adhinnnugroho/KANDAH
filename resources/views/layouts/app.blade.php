@@ -37,37 +37,7 @@
 }" x-init="darkModeStore = initializeDarkMode()">
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
 
-        <aside class="fixed lg:w-96 w-screen h-screen">
-            <div class="h-full  overflow-y-auto bg-gray-50 dark:bg-gray-800" x-data="{
-                SystemSettingScreen: false,
-                ProfileSettingScreen: false,
-            }">
-                <template x-if="!ProfileSettingScreen && !SystemSettingScreen">
-                    <div class="WelcomeScreen">
-                        @livewire('navigation.profile-navigation', key(time()))
-                        <x-input.search-input type="text" placeholder="search chatting"
-                            wire:model.live="search_chat" />
-                        <div class="">
-                            <img src="{{ asset('/assets/img/notfound.svg') }}" alt=""
-                                class="w-72 lg:mt-32 lg:ml-10 ml-12 mt-20">
-
-                            <p class="text-center text-gray-500 text-xl font-semibold mt-5">Tidak ada yang ngechat nih
-                                wkwkw
-                            </p>
-                        </div>
-                    </div>
-                </template>
-
-
-                <div x-show="SystemSettingScreen && !ProfileSettingScreen" x-cloak>
-                    @livewire('settings.system-settings')
-                </div>
-
-                <div x-show="ProfileSettingScreen" x-cloak>
-                    @livewire('settings.profile-settings')
-                </div>
-            </div>
-        </aside>
+        @include('layouts.sidenavigations')
         <div class="sm:ml-[24rem]">
             <div class="">
                 {{ $slot }}
