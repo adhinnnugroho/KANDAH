@@ -29,9 +29,25 @@
             @livewire('settings.profile-settings')
         </div>
 
-        <div x-show="ListContactScreen" x-cloak>
+        <div x-show="ListContactScreen & !AddContactScreen" x-cloak>
             <x-navigations.navigation-back title="List Kontak" icons="fa-arrow-left"
                 x-on:click="ListContactScreen = !ListContactScreen" />
+
+
+            <div x-on:click="AddContactScreen = !AddContactScreen">
+                <x-card.list-setting-card>
+                    <div class="lg:ml-4 dark:text-white ">
+                        <i class="fas fa-phone text-lg lg:mr-2"></i>
+                        Tambah Kontak
+                    </div>
+                </x-card.list-setting-card>
+            </div>
+        </div>
+
+        <div x-show="AddContactScreen" x-cloak>
+            <x-navigations.navigation-back title="Simpan kontak" icons="fa-arrow-left"
+                x-on:click="AddContactScreen = !AddContactScreen" />
+            @livewire('settings.system-add-contact')
         </div>
 
         <div class="bg-green-700 text-white rounded-full w-10 h-10 absolute right-5 bottom-5 text-center text-3xl cursor-pointer"
