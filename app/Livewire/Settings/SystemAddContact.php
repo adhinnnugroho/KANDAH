@@ -2,7 +2,13 @@
 
 namespace App\Livewire\Settings;
 
+use App\Models\Chats\ChatRoom;
+use App\Models\User;
+use App\Models\UserContact;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Illuminate\Support\Str;
+
 
 class SystemAddContact extends Component
 {
@@ -42,5 +48,21 @@ class SystemAddContact extends Component
 
     public function submit()
     {
+        $userToken = User::where([
+            'user_token' => $this->listContact['code_contact'],
+        ])->first();
+
+        $chatRoom = ChatRoom::create([
+            'owner_id' => Auth::user()->id,
+            'with_id' => $userToken->id
+        ]);
+
+        UserContact::create([
+            'uuid' => Str::uuid(),
+            'name' => $this->listContact['name'],
+            'contact_id' => $userToken->id,
+            'user_id' => Auth::user()->id,
+            'chat_room_id' => $chatRoom->id
+        ]);
     }
 }

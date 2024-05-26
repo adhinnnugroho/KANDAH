@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="p-2">
-            <x-button.basic-button background="bg-blue-500" wire:click="validationsFrom">
+            <x-button.basic-button background="bg-blue-500" wire:click="validationsFrom" wire:loading.attr="disabled">
                 <div wire:loading.remove wire:target="validationsFrom">
                     Simpan
                 </div>
