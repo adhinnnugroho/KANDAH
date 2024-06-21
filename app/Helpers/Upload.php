@@ -2,20 +2,15 @@
 
 namespace App\Helpers;
 
-use Image;
 use Illuminate\Support\Facades\Storage;
 
 class Upload
 {
     public static function toUpload($file, $type = 'payment')
     {
-        // $file_ext = strtolower($file->getClientOriginalExtension());
-
         switch ($type) {
             case 'profile_user':
                 $image_parts = explode(';base64,', $file);
-                // $image_type_aux = explode('image/', $image_parts[0]);
-                // $image_type = $image_type_aux[1];
                 $image_base64 = base64_decode($image_parts[1]);
                 $filename = 'FILE_PROFILE_' . date('Ymd') . '_' . time() . '.png';
                 $filelocation_db = 'images/user-profile/' . date("Y/m/");
@@ -24,13 +19,11 @@ class Upload
                 Storage::disk('public')->put($filelocation_db . $filename, $image_base64);
                 break;
 
-
-
             default:
                 $filename = $file;
-                $filelocation = 'images/payments/' . date('Y') . '/' . date('m') . '/' . $filename;
+                $filelocation = 'images/notfound/' . date('Y/M') . $filename;
 
-                Storage::disk('Media')->put($filelocation, $file, 'public');
+                Storage::disk('public')->put($filelocation, $file, 'public');
                 break;
         }
 
