@@ -5,6 +5,7 @@ namespace App\Livewire\Settings;
 use App\Models\Chats\ChatRoom;
 use App\Models\User;
 use App\Models\UserContact;
+use App\Traits\Alert\AlertTrait;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Illuminate\Support\Str;
@@ -12,6 +13,9 @@ use Illuminate\Support\Str;
 
 class SystemAddContact extends Component
 {
+
+    use AlertTrait;
+
     public $listContact;
 
     public function render()
@@ -52,17 +56,21 @@ class SystemAddContact extends Component
             'user_token' => $this->listContact['code_contact'],
         ])->first();
 
-        $chatRoom = ChatRoom::create([
-            'owner_id' => Auth::user()->id,
-            'with_id' => $userToken->id
-        ]);
+        if (!is_null($userToken)) {
+            $chatRoom = ChatRoom::create([
+                'owner_id' => Auth::user()->id,
+                'with_id' => $userToken->id
+            ]);
 
-        UserContact::create([
-            'uuid' => Str::uuid(),
-            'name' => $this->listContact['name'],
-            'contact_id' => $userToken->id,
-            'user_id' => Auth::user()->id,
-            'chat_room_id' => $chatRoom->id
-        ]);
+            UserContact::create([
+                'uuid' => Str::uuid(),
+                'name' => $this->listContact['name'],
+                'contact_id' => $userToken->id,
+                'user_id' => Auth::user()->id,
+                'chat_room_id' => $chatRoom->id
+            ]);
+        } else {
+            $this->alertWarning('Kode Kontak tidak ditemukan');
+        }
     }
 }

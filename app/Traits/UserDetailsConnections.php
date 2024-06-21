@@ -3,7 +3,6 @@
 namespace App\Traits;
 
 use App\Models\UserDetails;
-use Illuminate\Support\Facades\Storage;
 
 trait UserDetailsConnections
 {
